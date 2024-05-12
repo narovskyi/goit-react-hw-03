@@ -1,6 +1,10 @@
 import css from './SearchBox.module.css'
 
-export default function Filter({ filter, onChange }) {
+export default function SearchBox({ filter, setFilter }) {
+    const filterValueHandler = (e) => {
+        setFilter(e.target.value);
+    }
+
     return (
         <>
             <input
@@ -8,7 +12,7 @@ export default function Filter({ filter, onChange }) {
                 type="text"
                 name='filter'
                 placeholder="Filter"
-                onChange={onChange}
+                onChange={filterValueHandler}
                 value={filter}
             />
         </>

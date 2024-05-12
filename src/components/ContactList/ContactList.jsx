@@ -1,3 +1,4 @@
+import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
 
 export default function ContactList({ contacts, onClick }) {
@@ -6,12 +7,7 @@ export default function ContactList({ contacts, onClick }) {
             <h2 className={css.title}>Contacts</h2>
             <ul className={css.list}>
                 {contacts.map(({ name, id, number }) => (
-                    <li className={css.li} key={id}>
-                        <button className={css.button} onClick={() => { onClick(id) }}>
-                            Delete
-                        </button>
-                        {name}: <span>{number}</span>
-                    </li>
+                    <Contact key={id} id={id} name={name} number={number} onClick={onClick} />
                 ))}
             </ul>
         </>

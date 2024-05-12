@@ -1,0 +1,12 @@
+.button {
+    margin-right: 20px;
+}
+
+.li {
+    font-weight: bold;
+    color: #66635b;
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
