@@ -18,9 +18,20 @@ export default function App() {
         localStorage.setItem('contacts', JSON.stringify(contacts));
     }, [contacts])
 
+    const addContactHandler = (newContact) => {
+        setContacts(prevContacts => [
+            ...prevContacts,
+            newContact
+        ]);
+    }
+
     const deleteContact = (id) => {
         const updatedContacts = contacts.filter(contact => contact.id !== id);
         setContacts(updatedContacts);
+    }
+
+    const filterValueHandler = (e) => {
+        setFilter(e.target.value);
     }
 
     const normilizedFilter = filter.toLowerCase();
@@ -29,10 +40,9 @@ export default function App() {
         <div className={css.container}>
             <h1 className={css.title}>Phonebook</h1>
             <ContactForm
-              contacts={contacts}
-              setContacts={setContacts}
+                onSubmit={addContactHandler}
             />
-            <SearchBox filter={filter} setFilter={setFilter}/>
+            <SearchBox filter={filter} setFilter={filterValueHandler}/>
             <ContactList contacts={visibleContacts} onClick={deleteContact}/>
         </div>
     );

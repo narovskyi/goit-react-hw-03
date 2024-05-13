@@ -13,20 +13,12 @@ const validationSchema = Yup.object().shape({
     number: Yup.string().required('Required!').min(3, 'Number is too short!')
 });
 
-export default function ContactForm({ contacts, setContacts }) {
-    const addContactHandler = (values, { resetForm }) => {
-        const normilizedName = values.name.toLowerCase();
-        const sameName = contacts.filter(contact => contact.name.toLowerCase() === normilizedName);
-        if (sameName.length > 0) {
-            alert(`${sameName[0].name} is already in contacts`);
-            return;
-        }
-        setContacts(prevContacts => [
-            ...prevContacts,
-            {
-                id: nanoid(),
-                ...values
-            }]);
+export default function ContactForm({ onSubmit }) {
+    const handleSubmit = (values, { resetForm }) => {
+        onSubmit({
+            id: nanoid(),
+            ...values
+        })
         resetForm();
     }
 
@@ -35,7 +27,7 @@ export default function ContactForm({ contacts, setContacts }) {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={addContactHandler}
+                onSubmit={handleSubmit}
             >
                 <Form>
                     <div>
